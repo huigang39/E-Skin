@@ -8,7 +8,10 @@ serversocket = socket.socket(
             socket.AF_INET, socket.SOCK_STREAM)
 
 # 获取本地主机名
-host = socket.gethostname()
+# host = socket.gethostname()
+
+# 获取当前IP地址
+host = '192.168.66.193'
 
 port = 2333
 

@@ -6,7 +6,9 @@ import struct
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # 获取本地主机名
-host = socket.gethostname()
+# host = socket.gethostname()
+
+host = '192.168.66.168'
 
 # 设置端口号
 port = 2333
