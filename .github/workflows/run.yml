@@ -12,7 +12,7 @@ jobs:
     - name: Check port
       uses: nrukavkov/open-ports-check-action@v1
       with:
-        port: 80, 443
+        port: 2333
         host: 'google.com'
         pause: 1000
         needFail: 'true'
