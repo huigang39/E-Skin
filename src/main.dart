@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: '电子皮肤手势信号分类'),
+      home: MyHomePage(title: '手势信号分类'),
     );
   }
 }
