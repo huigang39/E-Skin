@@ -2,6 +2,7 @@ name: base
 channels:
   - defaults
 dependencies:
-  - joblib=1.1.1=py310h06a4308_0
-  - pandas=1.5.3=py310h1128e8f_0
-  - pysocks=1.7.1=py310h06a4308_0
+  - joblib=1.1.1
+  - pandas=1.5.3
+  - pysocks=1.7.1
+  - scikit-learn=1.2.2
