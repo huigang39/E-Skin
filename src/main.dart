@@ -29,14 +29,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _controller = TextEditingController();
+  TextEditingController _ipController = TextEditingController();
+  TextEditingController _portController = TextEditingController();
   String _serverResponse = '';
+  String _ipAddress = '';
+  int _portNumber = 0;
 
   Future<void> _sendData() async {
-    String ip = '10.67.104.154';
-
-    Socket socket = await Socket.connect(ip, 12345);
-    socket.writeln(_controller.text);
+    Socket socket = await Socket.connect(_ipAddress, _portNumber);
+    socket.writeln(_ipController.text);
     await socket.flush();
 
     socket.listen((List<int> event) {
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     });
 
-    _controller.text = '';
+    _ipController.text = '';
     socket.close();
   }
 
@@ -55,33 +56,78 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: '输出采集的特征数据',
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: TextField(
+              onChanged: (value) => _ipAddress = value,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                  ),
+                ),
+                labelText: '请输入IP地址',
+                labelStyle: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 18.0,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                    width: 2.0,
+                  ),
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: _sendData,
-              child: Text('发送数据'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Text(
-                '识别手势为: $_serverResponse',
-                style: Theme.of(context).textTheme.titleLarge,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: TextField(
+              onChanged: (value) => _portNumber = int.tryParse(value) ?? 0,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                  ),
+                ),
+                labelText: '请输入端口号',
+                labelStyle: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 18.0,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                    width: 2.0,
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Text(
+              '识别手势为: $_serverResponse',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _sendData,
+        child: Icon(Icons.send),
       ),
     );
   }
