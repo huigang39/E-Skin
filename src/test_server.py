@@ -5,11 +5,12 @@ import socket
 
 def start_server(label_map, model):
     host = socket.gethostname()
+    ip_address = socket.gethostbyname(host)
     port = 2333
 
     print(host)
     server_socket = socket.socket()
-    server_socket.bind((host, port))
+    server_socket.bind((ip_address, port))
 
     server_socket.listen(1)
 
