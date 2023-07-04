@@ -18,13 +18,13 @@ jobs:
         echo ${{ steps.ip.outputs.ipv4 }}
         echo ${{ steps.ip.outputs.ipv6 }}
     - name: Check port
-    uses: nrukavkov/open-ports-check-action@v1
-    with:
-      port: 2333
-      host: ${{ steps.ip.outputs.ipv4 }}
-      pause: 1000
-      needFail: 'true'
-      reverse: 'false'
+      uses: nrukavkov/open-ports-check-action@v1
+      with:
+        port: 2333
+        host: ${{ steps.ip.outputs.ipv4 }}
+        pause: 1000
+        needFail: 'true'
+        reverse: 'false'
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
