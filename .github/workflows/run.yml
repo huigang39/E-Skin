@@ -9,6 +9,14 @@ jobs:
       max-parallel: 5
 
     steps:
+    - name: Check port
+      uses: nrukavkov/open-ports-check-action@v1
+      with:
+        port: 80, 443
+        host: 'google.com'
+        pause: 1000
+        needFail: 'true'
+        reverse: 'false'
     - name: Public IP
       id: ip
       uses: haythem/public-ip@v1.3
