@@ -9,14 +9,6 @@ jobs:
       max-parallel: 5
 
     steps:
-    - name: Check port
-      uses: nrukavkov/open-ports-check-action@v1
-      with:
-        port: 2333
-        host: 'localhost'
-        pause: 1000
-        needFail: 'true'
-        reverse: 'false'
     - name: Public IP
       id: ip
       uses: haythem/public-ip@v1.3
@@ -25,6 +17,14 @@ jobs:
       run: |
         echo ${{ steps.ip.outputs.ipv4 }}
         echo ${{ steps.ip.outputs.ipv6 }}
+    - name: Check port
+    uses: nrukavkov/open-ports-check-action@v1
+    with:
+      port: 2333
+      host: ${{ steps.ip.outputs.ipv4 }}
+      pause: 1000
+      needFail: 'true'
+      reverse: 'false'
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
