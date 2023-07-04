@@ -13,7 +13,7 @@ jobs:
       uses: nrukavkov/open-ports-check-action@v1
       with:
         port: 2333
-        host: 'google.com'
+        host: 'localhost'
         pause: 1000
         needFail: 'true'
         reverse: 'false'
