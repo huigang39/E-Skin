@@ -4,7 +4,8 @@ import socket
 
 
 def start_server(label_map, model):
-    ip_address = '20.239.226.148'
+    host = socket.gethostname()
+    ip_address = socket.gethostbyname(host)
     port = 2333
 
     server_socket = socket.socket()
