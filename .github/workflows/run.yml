@@ -7,7 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
-
+      
+    services:
+        eskin:
+          image: nginx:latest
+          ports:
+            # 将容器的 80 端口映射到主机的 8080 端口
+            - 2333:2333
+          
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
