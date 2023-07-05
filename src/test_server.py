@@ -8,7 +8,6 @@ def start_server(label_map, model):
     ip_address = socket.gethostbyname(host)
     port = 2333
 
-    print(ip_address)
     server_socket = socket.socket()
     server_socket.bind((ip_address, port))
 
