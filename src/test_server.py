@@ -4,7 +4,7 @@ import socket
 
 
 def start_server(label_map, model):
-    ip_address = 20.239.226.148
+    ip_address = '20.239.226.148'
     port = 2333
 
     print(host)
