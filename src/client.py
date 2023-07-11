@@ -1,26 +1,13 @@
 import socket
-import sys
-import struct
 
-# 创建 socket 对象
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# 获取本地主机名
-# host = socket.gethostname()
-
-host = '192.168.66.168'
-
-# 设置端口号
+host = '20.189.79.217'
 port = 2333
 
-# 连接服务，指定主机和端口
-s.connect((host, port))
+client_socket = socket.socket()
+client_socket.connect((host, port))
 
-# 接收小于 1024 字节的数据
-msg = s.recv(1024)
+# 接收服务端返回的预测结果
+result = client_socket.recv(1024)
+print(result.decode())
 
-s.close()
-
-num = struct.unpack("<Q", msg)[0]
-
-print (num)
+client_socket.close()
